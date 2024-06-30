@@ -7,6 +7,8 @@ import { ReplyableError } from "./error";
 import Pipeline from "./pipeline";
 import { OM_VERSION } from "./version";
 
+performance.mark("start");
+
 process.title = "discordjs-japan/om";
 
 const client = new Client({
@@ -66,6 +68,9 @@ client.once(Events.ClientReady, async (client) => {
     type: ActivityType.Custom,
     name: `v${OM_VERSION}`,
   });
+
+  performance.mark("ready");
+  console.log(performance.measure("startup", "start", "ready"));
 });
 
 function shutdown() {
